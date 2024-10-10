@@ -1,1 +1,19 @@
 // LOCALHOST ### GET http://localhost:8080/contacts ### GET
+
+POST http://localhost:8080/contacts
+
+{"firstName": "Johnny",
+"lastName": "Smith",
+"email": "Johny@gmail.com",
+"favoriteColor": "Green",
+"birthday": "10/9/99"}
+
+
+PUT  http://localhost:8080/contacts/670851cca82f1c28e3f0d1c4
+{"firstName": "Caleb",
+"lastName": "Smith",
+"email": "Johny@gmail.com",
+"favoriteColor": "Green",
+"birthday": "10/9/99"}
+
+DELETE http://localhost:8080/contacts/670851cca82f1c28e3f0d1c4

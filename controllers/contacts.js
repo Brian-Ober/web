@@ -48,7 +48,7 @@ const getAll = async (req, res, next) => {
 // };
 
 const getSingle = async (req, res, next) => {
-  const userId = new ObjectId(req.params.id);
+  const userId = req.params.id
   console.log("yes");
   const result = await mongodb
   
@@ -60,8 +60,106 @@ const getSingle = async (req, res, next) => {
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists[0]);
+    console.log(result)
   });
 };
 
+const newPost = async (req, res, next) => {
+  const dbInstance = mongodb.getDb();
+  const db = dbInstance.db();
+  const collectionName = 'contacts';
+  const collection = db.collection(collectionName);
+  console.log("ok");
+  const result = await collection.insertOne(
+      req.body
+  )
+  res.status(200).send(result);
+}
+
+// const updatePost = async (req, res, next) => {
+//   const dbInstance = mongodb.getDb();
+//   const { ObjectId } = require('mongodb');
+//   const db = dbInstance.db();
+//   const collectionName = 'contacts';
+//   const collection = db.collection(collectionName);
+//   console.log("update");
+//   const userId = req.params.id;
+//   const existingContact = await collection.findOne({ _id: new ObjectId(userId) });
+//   if (!existingContact) {
+//     return res.status(404).send('No contact found with that ID.');
+//   }
+//   else {
+//     console.log("confirm");
+//   }
+//   console.log(userId);
+//   const content = req.body;
+//   console.log(content);
+//   const result = await collection.replaceOne({ _id: userId }, content);
+//   if (result.modifiedCount === 0) {
+//     return res.status(404).send('No contact found with that ID or no changes made.');
+//   }
+// };
+
+const updatePost = async (req, res, next) => {
+  try {
+    const dbInstance = mongodb.getDb();
+    const db = dbInstance.db();
+    const collectionName = 'contacts';
+    const collection = db.collection(collectionName);
+
+    const userId = req.params.id;
+    console.log('User ID from request:', userId);
+
+    // Validate ObjectId
+    if (!ObjectId.isValid(userId)) {
+      return res.status(400).send('Invalid ID format.');
+    }
+
+    // Check if the document exists
+    const existingContact = await collection.findOne({ _id: new ObjectId(userId) });
+    if (!existingContact) {
+      return res.status(404).send('No contact found with that ID.');
+    }
+
+    console.log('Request body:', req.body);
+
+    // Update document
+    const result = await collection.updateOne({ _id: new ObjectId(userId) }, { $set: req.body });
+
+    if (result.modifiedCount === 0) {
+      return res.status(400).send('No changes made or contact not found.');
+    }
+
+    res.status(200).send('Contact updated successfully.');
+  } catch (error) {
+    console.error('Error updating contact:', error);
+    res.status(500).send('Internal server error.');
+  }
+};
+
+
+const clearPost = async (req, res, next) => {
+  try {
+    const dbInstance = mongodb.getDb();
+    const db = dbInstance.db();
+    const collectionName = 'contacts';
+    const userId = req.params.id;
+    
+    const collection = db.collection(collectionName);
+    
+    // Ensure userId is converted to an ObjectId if necessary
+    const result = await collection.deleteOne({ _id: new ObjectId(userId) });
+
+    if (result.deletedCount === 0) {
+      return res.status(404).send('No contact found with that ID.');
+    }
+
+    res.status(200).send('Contact deleted successfully.');
+  } catch (error) {
+    console.error('Error deleting contact:', error);
+    res.status(500).send('Internal server error.');
+  }
+};
+
 console.log("test2");
-module.exports = { getAll, getSingle };
+module.exports = { getAll, getSingle, newPost, updatePost, clearPost };
