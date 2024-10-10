@@ -1,0 +1,89 @@
+body {
+    font-size: 1.5em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#other {
+    list-style-type: lower-alpha;
+}
+
+.layout1 {
+    margin: auto;
+    width: 80%;
+    border-style: solid;
+    padding: 45px;
+    margin-bottom: 10px;
+}
+
+.personalayout {
+    display: grid;
+    grid-template-columns: 520px 60% auto;
+    gap: 80px;
+}
+
+
+
+#about {
+    grid-column: 2;
+    grid-row: 2;
+    margin-top: -35px;
+}
+#considerations {
+    grid-column: 1;
+    margin-top: -35px;
+}
+
+#bottom {
+    grid-column: 2;
+    display: grid;
+    gap: 80px;
+    grid-template-columns: 50% auto;
+    margin-top: -35px;
+}
+
+#concerns {
+    grid-column: 1;
+}
+
+#tasks {
+    grid-column: 2;
+}
+
+#persona {
+    width:1200px;
+}
+
+#Fred {
+    width: 500px;
+    grid-column: 1;
+}
+
+#question {
+    margin: auto;
+    display: block;
+    width: 84%;
+}
+
+h1 {
+    margin-left: 8%;
+}
+
+header .navigation{
+    background-color: blue;
+}
+
+.navigation li{
+    display: block;
+}
+
+.navigation a {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.navigation a:hover {
+    background-color:white;
+    color: blue;
+}
+

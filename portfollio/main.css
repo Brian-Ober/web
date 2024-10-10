@@ -1,0 +1,54 @@
+
+body {
+    background-color: blue;
+}
+
+main {
+    background-color:white;
+    width: 90%;
+    height: 100%;
+    margin-left: auto;
+    margin-right:auto;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 30px;
+}
+
+h1, h2 {text-align: center;}
+
+li {
+    list-style: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+#rafting, #project  {
+    display: block;
+    width: 95%;
+}
+
+#chamber {
+    display: block;
+    width: 95%;
+}
+
+nav, footer {
+    background-color: white;
+}
+
+header .navigation{
+    background-color: blue;
+}
+
+.navigation a {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.navigation a:hover {
+    background-color:white;
+    color: blue;
+}
+
