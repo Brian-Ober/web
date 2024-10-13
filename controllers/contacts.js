@@ -55,7 +55,7 @@ const getSingle = async (req, res, next) => {
     .getDb()
     .db()
     .collection('contacts')
-    .find({ _id: userId });
+    .find({ _id: ObjectId(userId) });
     
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
