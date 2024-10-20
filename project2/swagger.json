@@ -11,17 +11,7 @@
     "http"
   ],
   "paths": {
-    "/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/contacts": {
+    "/characters": {
       "get": {
         "description": "",
         "produces": [
@@ -45,7 +35,7 @@
         }
       }
     },
-    "/contacts/{id}": {
+    "/characters/{id}": {
       "get": {
         "description": "",
         "produces": [
